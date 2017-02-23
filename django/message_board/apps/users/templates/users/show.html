@@ -1,0 +1,34 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+  <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+  <p>Joined on {{ user.created_at }}</p>
+  <p>Email {{ user.email }}</p>
+  <p>Description: {{ user.description }}</p>
+  <h3>Leave a message for {{ user.first_name }}</h3>
+  <form action="{% url 'users:create_post' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="user_to" value="{{ user.id }}">
+    <textarea name="content"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+  {% for post in posts %}
+    <div class="post">
+      <h5>{{ post.user_from.first_name }}<small>{{ post.created_at }}</small></h5>
+      <p>{{ post.content }}</p>
+    </div>
+    <h5>Enter comment</h5>
+    {% for comment in post.comment_set.all %}
+    <div class="comment">
+      <h5>{{ comment.user.first_name }}<small>{{ comment.created_at }}</small></h5>
+      <p>{{ comment.content }}</p>
+    </div>
+    {% endfor %}
+    <form class='comment_form' action="{% url 'users:create_comment' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="post_id" value="{{ post.id }}">
+      <textarea name="content"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  {% endfor %}
+{% endblock %}

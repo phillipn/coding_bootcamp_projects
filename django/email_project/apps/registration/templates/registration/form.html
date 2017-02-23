@@ -1,0 +1,17 @@
+{% extends 'registration/layout.html' %}
+
+{% block title %}Form{% endblock %}
+
+{% block content %}
+  {% for message in messages %}
+    <div class="{{message.tags}}">
+      {{message}}
+    </div>
+  {% endfor %}
+  <form method="post">
+    {% csrf_token %}
+    <label>Email</label>
+    <input type="email" name="email">
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}

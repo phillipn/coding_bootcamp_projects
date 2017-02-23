@@ -1,0 +1,22 @@
+.error{
+  background: red;
+  color: white;
+  padding: 10px 20px;
+}
+.success{
+  background: green;
+  color: white;
+  padding: 10px 20px;
+}
+.brand{
+  float: left;
+}
+.name, .login{
+  float:right;
+}
+.name{
+  margin-right: 20px;
+}
+.container{
+  padding-top: 60px;
+}

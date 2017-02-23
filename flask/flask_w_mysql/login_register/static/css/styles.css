@@ -1,0 +1,75 @@
+body{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.navbar{
+  position: fixed;
+  top: 0;
+  right: 20px;
+}
+.navp{
+  text-align: right;
+}
+.container{
+    width: 60%;
+}
+.form{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+form{
+  padding: 80px;
+  background: #EEEEEE;
+  border-radius: 20px;
+  text-align: left;
+  width: 75%;
+}
+input{
+  line-height: 30px;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 9px;
+}
+label{
+  display: block;
+}
+button{
+  padding: 10px 20px;
+  background: blue;
+  color: white;
+  font-size: 20px;
+  width: 50%;
+  border-radius: 15px;
+}
+.field > button{
+  text-align: center !important;
+}
+.submit{
+  text-align: center;
+}
+.flashes{
+  text-align: left;
+}
+.error{
+  color: red;
+}
+.success{
+  color: green;
+}
+@media screen and (max-width: 700px){
+  .container{
+    width: 80%;
+  }
+  form{
+    padding: 40px;
+  }
+  button{
+    font-size: .8em;
+  }
+}

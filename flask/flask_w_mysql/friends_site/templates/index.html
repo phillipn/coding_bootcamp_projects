@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block title %}Index{% endblock %}
+{% block content %}
+  {% for friend in friends: %}
+   <p>ID: {{ friend['id'] }}</p>
+   <p>First Name: {{ friend['first_name'] }}</p>
+   <p>Last Name: {{ friend['last_name'] }}</p>
+   <p>Email: {{ friend['email'] }}</p>
+   <form action="{{ url_for('delete', friend_id=friend['id']) }}" method="post">
+     <button type="submit">De-Friend</button>
+   </form>
+   <a href="{{ url_for('edit', friend_id=friend['id']) }}">See {{ friend['first_name'] }}'s page</a>
+   <hr>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+<div class="jumbotron">
+  <h3>Welcome to the Message Board</h3>
+  <p>We are here to fill all of your messaging needs.</p>
+  <a class='btn' href="{% url 'users:register' %}">Begin</a>
+</div>
+{% endblock %}

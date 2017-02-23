@@ -1,0 +1,44 @@
+{% extends 'login/layout.html' %}
+
+{% block title %}Form{% endblock %}
+
+{% block content %}
+<div class="form">
+  <form id='login_form' action='{% url  "login:login" %}' method="post">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="login">
+    <div class="field">
+      <label for="email">Email:</label>
+      <input type="text" name="email">
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" name="password">
+    </div>
+    <div class="submit">
+      <button type="submit" name="button">Log in</button>
+    </div>
+  </form>
+  <form id='register_form' action='{% url  "login:register" %}' method="post">
+    {% csrf_token %}
+    {% for field in register_form %}
+      <div>{{ field.label_tag }} {{ field }}</div>
+      {% if field.errors %}
+      <div class="error">{{ field.errors }}</div>
+      {% endif %}
+    {% endfor %}
+    {% if register_form.non_field_errors %}
+    <div class="error">
+      <ul>
+        {% for err in register_form.non_field_errors %}
+          <li>{{ err }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <div class="submit">
+      <button type="submit" name="button">Register</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

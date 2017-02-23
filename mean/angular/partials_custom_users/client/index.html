@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Partials</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var myApp = angular.module('myApp', ['ngRoute'])
+
+      myApp.config(function($routeProvider, $locationProvider) {
+        $locationProvider.hashPrefix('');
+        $routeProvider
+          .when('/partial1', {
+            templateUrl: 'customizeUsers.html',
+            controller: 'customizeUsersController'
+          }).when('/partial2', {
+            templateUrl: 'userList.html',
+            controller: 'userListController'
+          }).otherwise({
+            redirectTo: '/'
+          });
+      })
+
+      myApp.controller('customizeUsersController', function($scope, $location, userFactory){
+        userFactory.index(function(users){
+          $scope.users = users
+        })
+
+        $scope.create = function(){
+          userFactory.create({first_name: $scope.first_name,last_name: $scope.last_name, language: $scope.language})
+          $location.url('/partial2')
+        }
+
+        $scope.delete = function(user){
+          userFactory.delete(user);
+        }
+      })
+
+      myApp.controller('userListController', function($scope, userFactory){
+        userFactory.index(function(users){
+          $scope.users = users
+        })
+      })
+
+      myApp.factory('userFactory', function(){
+        var users = [
+          {first_name: 'Nick', last_name: 'Phillips', language: 'Ruby'},
+          {first_name: 'Nick', last_name: 'Phillips', language: 'Ruby'},
+          {first_name: 'Nick', last_name: 'Phillips', language: 'Ruby'}
+        ]
+        return {
+          index: function(callback){
+            callback(users);
+          },
+          create: function(user){
+            users.push(user);
+          },
+          delete: function(user){
+            var index = users.indexOf(user);
+            users.splice(index, 1);
+          }
+        }
+      })
+    </script>
+  </head>
+  <body>
+    <h1>Hello, this is the home page where we instatnitate the angular module</h1>
+    <a href="#/partial1">customizeUsers</a>
+    <a href="#/partial2">userListController</a>
+    <div ng-view>
+    </div>
+  </body>
+</html>

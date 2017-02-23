@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Form Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h4>Register</h4>
+      <form class="" method="post">
+        <div class="field">
+          <label for="email"></label>
+          <input type="text" name="email" placeholder="Email" value="{{ session['email'] }}">
+        </div>
+        <div class="field">
+          <label for="first_name"></label>
+          <input type="text" name="first_name" placeholder="First Name" value="{{ session['first_name'] }}">
+        </div>
+        <div class="field">
+          <label for="last_name"></label>
+          <input type="text" name="last_name" placeholder="Last Name" value="{{ session['last_name'] }}">
+        </div>
+        <div class="field">
+          <label for="password"></label>
+          <input type="password" name="password" placeholder="Password">
+        </div>
+        <div class="field">
+          <label for="password_confirm"></label>
+          <input type="password" name="password_confirm" placeholder="Password Confirm">
+        </div>
+        <button type="submit" id="submit">Register!</button>
+      </form>
+      {% with messages = get_flashed_messages() %}
+        <div class="errors">
+        {% for message in messages %}
+          <ul>
+            <li>{{ message }}</li>
+          </ul>
+        {% endfor %}
+        </div>
+      {% endwith %}
+    </div>
+  </body>
+</html>

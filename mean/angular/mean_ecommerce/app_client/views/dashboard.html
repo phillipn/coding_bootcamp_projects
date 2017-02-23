@@ -1,0 +1,17 @@
+<navigation></navigation>
+<h3>Products</h3>
+<div ng-repeat='product in products' class="product">
+  <img ng-src="../static/images/{{product.image_path}}" alt="product image">
+  <p>{{ product.name }}</p>
+  <p>{{ product.quantity }} left</p>
+</div>
+<h3>Recent Orders</h3>
+<div ng-repeat='order in orders'>
+  <p>{{ order._customer.name }}</p>
+  <p>{{ order._product.name }}</p>
+  <p>{{ order.quantity }}</p>
+</div>
+<h3>New Customers</h3>
+<div ng-repeat='customer in customers'>
+  <p>{{ customer.name }}</p>
+</div>

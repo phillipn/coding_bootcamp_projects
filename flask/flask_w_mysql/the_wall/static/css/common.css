@@ -1,0 +1,56 @@
+.navbar{
+  width: 100%;
+  background: black;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height:60px;
+  z-index: 2;
+}
+.navbar a{
+  color: white;
+}
+.nav{
+  top: 0;
+  right: 0;
+  position: absolute;;
+  display: inline-block;
+  width: 220px;
+  margin-top: 20px;
+}
+.nav a{
+  margin-right: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.brand{
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: inline-block;
+  width: 165px;
+  font-size: 23px;
+  margin-top: 16px;
+  margin-left: 10px;
+}
+.brand a{
+  text-decoration: none;
+  font-weight: bold;
+}
+input{
+  line-height: 20px;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 9px;
+}
+label{
+  display: block;
+}
+.footer{
+  width: 100%;
+  background: black;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: white;
+}

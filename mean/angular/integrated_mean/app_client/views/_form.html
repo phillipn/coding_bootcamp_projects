@@ -1,0 +1,28 @@
+<form name='myForm'>
+  <div class="field">
+    <label for="first_name">First Name</label>
+    <input ng-model='user.first_name' class='form-control' type="text" name="first_name" required>
+    <div ng-messages="myForm.first_name.$error" multiple>
+      <div ng-if='error' ng-message="required">Please enter a value for this field.</div>
+    </div>
+  </div>
+  <div class="field">
+    <label for="last_name">Last Name</label>
+    <input ng-model='user.last_name' class='form-control' type="text" name="last_name" ng-minlength='3' required>
+    <div ng-messages="myForm.last_name.$error" multiple>
+      <div ng-if='error' ng-message="required">Please enter a value for this field.</div>
+      <div ng-if='error' ng-message="minlength">Three characters at least please.</div>
+    </div>
+  </div>
+  <div class="field">
+    <label for="birthday">Birthday</label>
+    <input ng-model='user.birthday' class='form-control' type="date" name="birthday" required>
+    {{ myForm.birthday.$error }}
+    <div ng-messages="myForm.birthday.$error" multiple>
+      <div ng-if='error' ng-message="required">Please enter a value for this field.</div>
+    </div>
+    {{ max_date_error }}
+  </div>
+  <button ng-click="action()" type="submit" name="button">Submit</button>
+</form>
+<a href="#!/">Users</a>

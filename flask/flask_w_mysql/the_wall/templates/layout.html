@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Blogginator | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href='{% block style %} {% endblock %}'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="brand">
+        <a href="#">The Blogginator</a>
+      </div>
+      <div class='nav'>
+        {% if session['user'] %}
+        <a href="/posts">Hello {{ session['user']['first_name'] }}</a>&nbsp;<a href="/logout">Logout</a>{% endif %}
+      </div>
+    </div>
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+    <div class="footer">
+      <p>Created by NP</p>
+    </div>
+  </body>
+</html>

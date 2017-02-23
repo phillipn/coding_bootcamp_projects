@@ -1,0 +1,11 @@
+{% extends 'pets/layout.html' %}
+
+{% block title %}New{% endblock %}
+
+{% block content %}
+  <form action="{% url 'pets:create' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}

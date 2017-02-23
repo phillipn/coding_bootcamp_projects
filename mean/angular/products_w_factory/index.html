@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Controlling products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var myApp = angular.module('myApp', []);
+
+      myApp.controller('productsController', ['$scope', 'myFactory', function($scope, myFactory){
+
+        $scope.products = myFactory.get();
+
+        $scope.addProduct = function(){
+          var obj = {};
+          obj['name'] = $scope.name;
+          obj['price'] = $scope.price;
+          myFactory.add(obj);
+        }
+
+        $scope.deleteProduct = function(product){
+          myFactory.delete(product);
+        }
+
+        $scope.sortType = 'name';
+        $scope.sortOrder = false;
+        $scope.changeSort = function(field){
+          if($scope.sortType == field){
+            $scope.sortOrder = !$scope.sortOrder;
+          } else {
+            $scope.sortOrder = false;
+            $scope.sortType = field;
+          }
+        }
+      }])
+
+      myApp.controller('ordersController', ['$scope', 'myFactory', function($scope, myFactory){
+        $scope.products = myFactory.get();
+
+        $scope.buyProduct = function(index){
+          myFactory.decrement(index);
+        }
+
+        $scope.sortType = 'name';
+        $scope.sortOrder = false;
+        $scope.changeSort = function(field){
+          if($scope.sortType == field){
+            $scope.sortOrder = !$scope.sortOrder;
+          } else {
+            $scope.sortOrder = false;
+            $scope.sortType = field;
+          }
+        }
+      }])
+
+      myApp.factory('myFactory', function(){
+
+        var products = [
+          {name: 'Nick', price: 100, quantity: 50},
+          {name: 'You', price: 200, quantity: 50},
+          {name: 'Me', price: 300, quantity: 50}
+        ];
+
+        return {
+          get: function(){
+            return products;
+          },
+          add: function(product){
+            products.push(product);
+          },
+          delete: function(product){
+            var index = products.indexOf(product);
+            products.splice(index, 1);
+          },
+          decrement: function(product){
+            var index = products.indexOf(product);
+            if(products[index].quantity == 0){
+              return false;
+            }
+            products[index].quantity -= 1;
+          }
+        }
+      })
+
+      myApp.directive('click', function(){
+        return {
+          restrict: 'EA',
+          scope: {
+            sort: '=sort',
+            field: '=field',
+            order: '=order'
+          },
+          templateUrl: 'template.html'
+        }
+      })
+
+    </script>
+  </head>
+  <body>
+    <div ng-controller='productsController' class="">
+      <label>Product Name</label>
+      <input ng-model='name' type="text" name="name" value="">
+      <label>Product Price</label>
+      <input ng-model='price' type="text" name="price" value="">
+      <button ng-click='addProduct()' type="submit" name="button">Submit</button>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <click sort='"name"' field='sortType' order='sortOrder' ng-click='changeSort("name")'></click>
+            </th>
+            <th>
+              <click sort='"quantity"' field='sortType' order='sortOrder' ng-click='changeSort("quantity")'></click>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat='product in products | filter:filter | orderBy:sortType:sortOrder'>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td><button ng-click='deleteProduct(product)' type="button" name="button">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <label>General filter</label>
+      <input ng-model='filter' type="text" name="" value="">
+    </div>
+    <div ng-controller='ordersController' class="">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <click sort='"name"' field='sortType' order='sortOrder' ng-click='changeSort("name")'></click>
+            </th>
+            <th>
+              <click sort='"price"' field='sortType' order='sortOrder' ng-click='changeSort("price")'></click>
+            </th>
+            <th>
+              <click sort='"quantity"' field='sortType' order='sortOrder' ng-click='changeSort("quantity")'></click>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat='product in products | filter:filter | orderBy:sortType:sortOrder'>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.quantity }}</td>
+            <td><button ng-click='buyProduct(product)' type="button" name="button">Buy</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

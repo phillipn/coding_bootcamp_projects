@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Name</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var socket = io('http://localhost:8000');
+
+        socket.on('prompt', function(data){
+          $('#users').html('<form id="name_form"><label for="">Name</label><input type="text" name="name" value=""><button type="submit" name="button">Join Room</button></form>')
+          $('#name_form').on('submit', function(e){
+            e.preventDefault();
+            socket.emit('name_submission', $(this).children('input').val())
+          })
+        })
+
+        socket.on('greeting', function(name){
+          $('.greeting').html('<h3>Hey ' + name + '</h3>');
+        })
+
+        socket.on('draw_room', function(data){
+          $('#users').html('');
+          $('#posts').html('');
+          for(var i =0; i<data['users'].length; i++){
+            $('#users').append('<button id="' + data['users'][i].name + '">' + data['users'][i].name + '</button>')
+          }
+          $('#posts').append('<form id="post_form"><label>Submit post</label><textarea name="content"></textarea><button type="submit">Submit</button></form>')
+          $('#post_form').on('submit', function(e){
+            e.preventDefault();
+            socket.emit('post_submission', $(this).children('textarea').val())
+          })
+          for(var j =0; j<data['posts'].length; j++){
+            $('#posts').append('<p class="post">' + data['posts'][j]['post'] + ' <small>By ' + data['posts'][j]['name'] + ' created on ' + data['posts'][j]["createdAt"] + '</small>' + '</p>')
+          }
+        })
+
+        socket.on('add_user', function(new_name){
+          if(!$('#' + new_name)){
+            $('#users').append('<button id="' + new_name + '">' + new_name + '</button>')
+          }
+        })
+
+        socket.on('remove_user', function(name){
+          $('#' + name).remove()
+        })
+
+        socket.on('add_post', function(post){
+          console.log(post);
+          if($('.post').length == 10){
+            $('.post')[0].remove();
+          }
+          $('#posts').append('<p class="post">' + post['post'] + ' <small>By ' + post['name'] + ' created on ' + post["createdAt"] + '</small>' + '</p>')
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <div class="greeting"></div>
+    <div id="users"></div>
+    <div id="posts"></div>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Name</title>
+    <script src="/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var socket = io.connect();
+
+        $('#increment').submit(function(e){
+          e.preventDefault();
+          socket.emit('button_press');
+        })
+        $('#reset').submit(function(e){
+          e.preventDefault();
+          socket.emit('button_reset');
+        })
+
+        socket.on('increment', function(data){
+          $('#arena').text(Number(data['count']));
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <form id='increment' method="post">
+      <button type="submit" name="button">Hit the button!</button>
+    </form>
+    <form id='reset' method="post">
+      <button type="submit" name="button">Reset!</button>
+    </form>
+    <div id="arena"><%= number %></div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+<div class="form">
+  <h3>Add User</h3>
+  <a href="{% url 'users:dashboard' %}">Return to Dashboard</a>
+  <form id='register_form' action='{% url  "users:new" %}' method="post">
+    {% csrf_token %}
+    {% include 'users/user_creation_form.html' %}
+</div>
+{% endblock %}

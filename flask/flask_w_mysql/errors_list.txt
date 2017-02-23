@@ -1,0 +1,10 @@
+1. Bunk URL
+sqlalchemy.exc.NoSuchModuleError: Can't load plugin: sqlalchemy.dialects:myql
+2. Incorrect Password
+(1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+3. Incorrect port
+(2003, "Can't connect to MySQL server on '127.0.0.1' (61)")
+4. Incorrect DB name
+(2003, "Can't connect to MySQL server on '127.0.0.1' (61)")
+5. Improper SQL Syntax
+(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM books' at line 1") [SQL: u'SELECT  FROM books']

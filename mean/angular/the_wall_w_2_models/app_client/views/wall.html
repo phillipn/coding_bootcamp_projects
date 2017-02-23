@@ -1,0 +1,25 @@
+<navigation></navigation>
+<h1>Wall</h1>
+<h3>Enter your post</h3>
+<form novalidate ng-submit='postForm.$valid && addPost()' name='postForm' method="post">
+  <textarea ng-model='postContent' name="postContent" required></textarea>
+  <button type="submit" name="button">Post your message</button>
+  <div ng-if='postForm.$submitted' ng-messages='postForm.postContent.$error'>
+    <p ng-message='required'>Please enter post</p>
+  </div>
+</form>
+<div ng-repeat='post in posts | orderBy:createdAt:true' class="post">
+  <p>{{ post.user }} at <small>{{ post.createdAt | date:'M/d/yy h:mm a' }}</small></p>
+  <p>{{ post.post}}</p>
+  <div ng-repeat='comment in post.comments | orderBy:createdAt ' class="comment">
+    <p>{{ comment.user }} at <small>{{ comment.createdAt | date:'M/d/yy h:mm a' }}</small></p>
+    <p>{{ comment.comment }}</p>
+  </div>
+  <form id='commentForm' novalidate ng-submit='commentForm.$valid && addComment(commentContent, post)' name='commentForm'>
+    <textarea ng-model='commentContent' name="commentContent" required></textarea>
+    <button type="submit" name="button">Post your comment</button>
+    <div ng-if='commentForm.$submitted' ng-messages='commentForm.commentContent.$error'>
+      <p ng-message='required'>Please enter comment</p>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,37 @@
+body{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container{
+  text-align: center;
+  width: 70%;
+  background: #F1F4F8;
+  border: 1px solid black;
+  padding: 40px 20px;
+  border-radius: 15px;
+}
+.container h3{
+  margin-top: 0px;
+}
+input, select{
+  background: white;
+  width: 70%;
+  line-height: 22px;
+  border-radius: 5px;
+  margin-bottom: 2px;
+  font-size:20px;
+}
+button{
+  width: 70%;
+  margin-top: 2px;
+  padding: 10px 10px;
+  background: green;
+  color: white;
+}
+.error{
+  color: red;
+}

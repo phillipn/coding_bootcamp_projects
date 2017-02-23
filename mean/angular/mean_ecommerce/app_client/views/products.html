@@ -1,0 +1,24 @@
+<navigation></navigation>
+<div class="sidebar">
+  <h3>Add a new product</h3>
+  <form name='productForm' ng-submit='addProduct()' multipart>
+    <label>Name</label>
+    <input ng-model='name' type="text" name="name" value="">
+    <label>Image</label>
+    <input fileread='file' type="file" name="image" accept="image/*">
+    <label>Description</label>
+    <textarea ng-model='description' name="description"></textarea>
+    <label>Quantity Available</label>
+    <select ng-model='quantity' name="quantity">
+      <option ng-repeat='number in [1,2,3,4,5,6,7,8,9,10]'>{{ number }}</option>
+    </select>
+    <button type="submit" name="button">Add product</button>
+  </form>
+</div>
+<div ng-repeat='product in products' class="product">
+  <!-- <img ng-src="" alt="Product Image"> -->
+  <h3>{{ product.name }}</h3>
+  <img ng-src="../static/images/{{product.image_path}}" alt="product image">
+  <p>{{ product.description }}</p>
+  <p>{{ product.quantity }} left</p>
+</div>

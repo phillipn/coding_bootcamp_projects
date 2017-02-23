@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Message Board</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'users/css/styles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous"></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type="text/javascript"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <a class="navbar-brand" href="#">Test App</a>
+      <div class="navbar-nav">
+        {% if request.session.user %}
+          <a class="nav-link" href="{% url 'users:dashboard' %}">Dashboard</a>
+          <a class="nav-link" href="#">Profile</a>
+          <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+        {% else %}
+          <a class="nav-link" href="{% url 'users:home' %}">Home</a>
+          <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+        {% endif %}
+      </div>
+    </nav>
+    <div class="container">
+      {% block content %}{% endblock %}
+      {% for message in messages %}
+        <div class="{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

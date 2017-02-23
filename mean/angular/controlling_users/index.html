@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Controlling Users</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.2/angular-messages.min.js" charset="utf-8"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var myApp = angular.module('myApp', ['ngMessages']);
+      myApp.controller('myController', function($scope){
+        $scope.users = [
+          {first_name: 'Nick', last_name: 'Phillips', language: 'Ruby', date: Date()},
+          {first_name: 'Ralph', last_name: 'Robetrts', language: 'PHP', date: Date()},
+          {first_name: 'John', last_name: 'Opple', language: 'JS', date: Date()}
+        ];
+        $scope.submitted = false;
+
+        $scope.addUser = function(){
+          $scope.submitted = true;
+          var obj = {};
+          obj['first_name'] = $scope.first_name;
+          obj['last_name'] = $scope.last_name;
+          obj['language'] = $scope.language;
+          obj['date'] = Date();
+
+          if(!$scope.first_name || !$scope.last_name || !$scope.language){
+            return false;
+          }
+
+          $scope.users.push(obj);
+        }
+        $scope.deleteUser = function(user){
+          var index = $scope.users.indexOf(user);
+          $scope.users.splice(index, 1);
+        }
+
+        $scope.sortDepiction = 'a-z';
+        $scope.sortType = 'first_name';
+        $scope.sortOrder = false;
+        $scope.changeSort = function(field){
+          if($scope.sortType == field){
+            $scope.sortOrder = !$scope.sortOrder;
+            if($scope.sortOrder == true){
+              $scope.sortDepiction = 'a-z';
+            } else {
+              $scope.sortDepiction = 'z-a';
+            }
+          } else {
+            $scope.sortOrder = false;
+            $scope.sortType = field;
+          }
+        }
+      })
+    </script>
+  </head>
+  <body ng-controller='myController'>
+    <form name='myForm' method="post">
+      <!-- For Bootstrap -->
+      <div ng-class="{ 'has-error': submitted && myForm.first_name.$invalid}" class="form-group">
+        <label class="control-label" for="inputError1">First Name</label>
+        <input ng-minlength='2' class="form-control" id="inputError1" ng-model='firstname' type="text" name="first_name" required value="">
+        <div ng-messages="myForm.first_name.$error" multiple>
+          <div ng-messages-include="messages.html"></div>
+          <!-- <div ng-if='submitted' ng-message="required">Please enter a value for this field.</div> -->
+        </div>
+      </div>
+
+      <label>Last Name</label>
+      <input ng-model='last_name' type="text" name="last_name" required value="">
+      <div ng-messages="myForm.last_name.$error" role="alert">
+        <!-- <div ng-if='submitted' ng-message="required">Please enter a value for this field.</div> -->
+      </div>
+
+      <label>Favorite Language</label>
+      <input ng-model='language' type="text" name="language" required value="">
+      <div ng-messages="myForm.language.$error" role="alert">
+        <!-- <div ng-if='submitted' ng-message="required">Please enter a value for this field.</div> -->
+      </div>
+
+      <button ng-click='addUser()' type="submit" name="button">Create User</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <a href="" ng-click='changeSort("first_name")'>
+              First Name
+              <span ng-show="sortType == 'first_name' && !sortOrder" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'first_name' && sortOrder" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th>
+            <a href="" ng-click='changeSort("last_name")'>
+              Last Name
+              <span ng-show="sortType == 'last_name' && !sortOrder" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'last_name' && sortOrder" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th>
+            <a href="" ng-click='changeSort("language")'>
+              Favorite Langauge
+              <span ng-show="sortType == 'language' && !sortOrder" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'language' && sortOrder" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th>
+            <a href="" ng-click='changeSort("date")'>
+              Date
+              <span ng-show="sortType == 'date' && !sortOrder" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'date' && sortOrder" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat='user in users | filter:name | orderBy:sortType:sortOrder'>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.language }}</td>
+          <td>{{ user.date }}</td>
+          <td><button ng-click='deleteUser(user)' type="button" name="button">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <label>General filter</label>
+    <input ng-model='name' type="text" name="" value="">
+  </body>
+</html>

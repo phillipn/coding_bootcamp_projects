@@ -1,0 +1,13 @@
+{% extends "form/base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+<div class="results">
+  <h3>Submitted Information</h3>
+  <p>Name: {{ request.session.user.name }}</p>
+  <p>Location: {{ request.session.user.location }}</p>
+  <p>Language: {{ request.session.user.language }}</p>
+  <p>Comment: {{ request.session.user.comment }}</p>
+</div>
+{% endblock %}

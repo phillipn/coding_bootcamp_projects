@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app='first_app'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var first_app = angular.module('first_app', []);
+
+      first_app.controller('first_controller', function($scope){
+        $scope.foods = [];
+        $scope.addFood = function(food){
+          $scope.foods.push(food);
+          $scope.food = '';
+        }
+      })
+    </script>
+  </head>
+  <body ng-controller='first_controller'>
+    <div>
+      <form method="post">
+        <label>Favorite Food</label>
+        <input ng-model='food' type="text" name="food" value="">
+        <button ng-click='addFood(food)' type="submit" name="button">Submit</button>
+      </form>
+      <p ng-if='food'>Currently typing {{ food }}</p>
+    </div>
+    <div class="filter">
+      <input ng-model='searchString' type="text" name="filter" value="">
+      <ul ng-if='foods'>
+        <li class='{{ $index }}' ng-repeat='food in foods | filter:searchString track by $index '>{{ food }}</li>
+      </ul>
+    </div>
+  </body>
+</html>

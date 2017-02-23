@@ -1,0 +1,6 @@
+<input ng-model='nameFilter.last_name' type="text" name="" value="">
+
+<div ng-repeat='user in users | filter:nameFilter.last_name track by $index'>
+  <userdisplay index='$index' user='user'></userdisplay>
+</div>
+<a href="#!/new">Add a user</a>

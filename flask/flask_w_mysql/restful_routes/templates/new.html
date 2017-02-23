@@ -1,0 +1,21 @@
+{% extends('layout.html') %}
+
+{% block title %}Create{% endblock %}
+{% block content %}
+  <h3>Create User</h3>
+  <form action="{{ url_for('create') }}" method="post">
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+      <div class="form-group row">
+        {{ field(placeholder=field.label.text, class='form-control') }}
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <span class='error'>{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" id="submit">Register!</button>
+  </form>
+  <a href="{{ url_for('index') }}">Go Back</a>
+{% endblock %}

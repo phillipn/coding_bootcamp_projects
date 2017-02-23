@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Notes App</title>
+    {% load staticfiles %}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src='{% static "notes/js/index.js" %}'></script>
+    <link rel="stylesheet" href="{% static 'notes/css/styles.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="notes">
+        {% for note in notes %}
+          <div class="post">
+            <p>{{ note.title }}</p>
+            <div id='{{ note.id }}' class='content_area'>
+              <p class='content_p'>{{ note.content }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <form class="note_form" action="{% url 'notes:create' %}" method="post">
+        {% csrf_token %}
+        <label>Enter title here</label>
+        <input type="text" name="title">
+        <button type="submit" name="button">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

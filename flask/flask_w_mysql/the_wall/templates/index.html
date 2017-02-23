@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+{% block title %}Home{% endblock %}
+{% block style %}{{ url_for('static', filename='css/index.css') }}{% endblock %}
+{% block content %}
+<div class="form">
+  <form id='login_form' action='/login' method="post">
+    <input type="hidden" name="action" value="login">
+    <div class="field">
+      <label for="email">Email:</label>
+      <input type="text" name="email">
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" name="password">
+    </div>
+    <div class="submit">
+      <button type="submit" name="button">Log in</button>
+    </div>
+    {% with errors = get_flashed_messages(category_filter=['error']) %}
+      {% if errors %}
+        <ul class='error_list'>
+        {% for error in errors %}
+          <li class='error'>{{ error }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </form>
+  <form id='register_form' action='/register' method="post">
+    <input type="hidden" name="action" value="register">
+    <div class="field">
+      <label for="firstname">First Name:</label>
+      <input type="text" name="first_name">
+      {% with errors = get_flashed_messages(category_filter=['first_name']) %}
+        {% if errors %}
+          <ul class='error_list'>
+          {% for error in errors %}
+            <li class='error'>{{ error }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+    <div class="field">
+      <label for="lastname">Last Name:</label>
+      <input type="text" name="last_name">
+      {% with errors = get_flashed_messages(category_filter=['last_name']) %}
+        {% if errors %}
+          <ul class='error_list'>
+          {% for error in errors %}
+            <li class='error'>{{ error }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+    <div class="field">
+      <label for="email">Email:</label>
+      <input type="text" name="email">
+      {% with errors = get_flashed_messages(category_filter=['email']) %}
+        {% if errors %}
+          <ul class='error_list'>
+          {% for error in errors %}
+            <li class='error'>{{ error }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+    <div class="field">
+      <label for="password">Password:</label>
+      <input type="password" name="password">
+      {% with errors = get_flashed_messages(category_filter=['password']) %}
+        {% if errors %}
+          <ul class='error_list'>
+          {% for error in errors %}
+            <li class='error'>{{ error }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+    <div class="field">
+      <label for="password_confirm">Password Confirmation:</label>
+      <input type="password" name="password_confirm">
+      {% with errors = get_flashed_messages(category_filter=['password_confirm']) %}
+        {% if errors %}
+          <ul class='error_list'>
+          {% for error in errors %}
+            <li class='error'>{{ error }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+    <div class="submit">
+      <button type="submit" name="button">Register</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

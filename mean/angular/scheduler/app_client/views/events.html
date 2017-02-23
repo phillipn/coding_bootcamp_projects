@@ -1,0 +1,13 @@
+<a href="#!/addEvent">Add event</a>
+<h1>Today</h1>
+<div ng-repeat='event in today | orderBy:"startTime":false'>
+  <h4>From {{ event.startTime | date:'hh: mm a'}} to {{ event.endTime | date:'hh: mm a'}}</h4>
+  <p>{{event.description}}</p>
+  <small>{{ event.startTime }}</small> | <small>{{ event.endTime }}</small>
+</div>
+<h1>Tomorrow</h1>
+<div ng-repeat='event in tomorrow | orderBy:"startTime":false'>
+  <h4>From {{ event.startTime | date:'hh: mm a'}} to {{ event.endTime | date:'hh: mm a'}}</h4>
+  <p>{{event.description}}</p>
+  <small>{{ event.startTime }}</small> | <small>{{ event.endTime }}</small>
+</div>

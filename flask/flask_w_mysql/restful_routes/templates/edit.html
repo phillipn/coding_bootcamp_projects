@@ -1,0 +1,24 @@
+{% extends('layout.html') %}
+
+{% block title %}Edit{% endblock %}
+{% block content %}
+  <h3>Edit User</h3>
+  <form action="{{ url_for('update', id=user['id']) }}" method="post">
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+      <div class="form-group row">
+        {% if field.label.text != 'CSRF Token' %}
+          <label>{{ field.label.text }}:</label>
+        {% endif %}
+        {{ field(value=user[field.name], class='form-control') }}
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <span class='error'>{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button class='btn btn-success' type="submit" id="submit">Edit!</button>
+  </form>
+  <a href="{{ url_for('index') }}">Go Back</a>
+{% endblock %}

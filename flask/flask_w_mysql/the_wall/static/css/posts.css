@@ -1,0 +1,168 @@
+body{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: red;
+}
+.container{
+  width: 100%;
+}
+.middle{
+  display: flex;
+  justify-content: center;
+}
+
+/* POST FORM CSS */
+.blob{
+  background: white;
+  width: 80%;
+  margin: 10px auto !important;
+  padding: 5px 0px;
+  margin: 10px 0px;
+  border-radius: 10px;
+}
+#post_form{
+  margin-top: 90px;
+  background: #EFF0F1;
+  width: 60%;
+  padding: 20px;
+  border-radius: 20px;
+}
+#post_form button{
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  font-size: 16px;
+  border-radius: 15px;
+}
+#post_form textarea{
+  width: 80%;
+}
+.line_break{
+  white-space: pre;
+  margin: 0px;
+}
+.post{
+  width:75%;
+  margin-bottom: 20px 0px !important;
+  margin: 0 auto;
+}
+.posts_div{
+  text-align: center;
+  margin-bottom: 130px;
+}
+.postHeader{
+  background: black;
+  color: white;
+  padding: 10px;
+  border-radius: 5px 5px 0px 0px;
+  height: 20px;
+}
+.postContent{
+  padding: 10px !important;
+  background: white;
+  text-align: left;
+  padding: 10px 0px;
+  border-radius: 0px 0px 5px 5px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+
+/* COMMENT FORM */
+.comment{
+  margin: 20px 0px;
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+#comment_form{
+  margin: 20px 0px;
+  margin: 0 auto;
+  width: 67%;
+  background: #EFF0F1;
+  padding: 5px;
+  border-radius: 5px;
+}
+#comment_form h4{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+#comment_form button{
+  display: inline;
+  vertical-align: middle;
+  background: black;
+  color: white;
+  font-size: 12px;
+  border-radius: 10px;
+}
+#comment_form textarea{
+  width: 40%;
+  vertical-align: middle;
+}
+#comment_form h3{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.commentHeader{
+  background: #D9D9DE;
+  color: black;
+  padding: 10px;
+  position: relative;
+  border-radius: 10px 10px 0px 0px;
+  height: 20px;
+  border: 1px solid black;
+  margin-bottom: 0px !important;
+}
+.commentContent{
+  padding: 10px !important;
+  background: white;
+  text-align: left;
+  padding: 10px 0px;
+  border-radius: 0px 0px 10px 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+
+
+/* COMMON FORM */
+.postHeader h3, .commentHeader h3{
+  display: inline-block;
+  float: left;
+  margin: 0;
+}
+.postHeader small, .commentHeader small{
+  float: right;
+}
+.deleteForm{
+  display: inline;
+}
+.deleteForm button{
+  background: red;
+  color: white;
+  margin-top: 5px;
+}
+
+/* MISC */
+.flashes{
+  text-align: left;
+}
+.flashes ul{
+  padding-left: 0px;
+}
+
+@media screen and (max-width: 480px){
+  .postHeader h3, .commentHeader h3{
+    display: block;
+    float: none;
+  }
+  .postHeader small, .commentHeader small{
+    float: none;
+  }
+  .postHeader, .commentHeader{
+    height: 30px;
+  }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>New</title>
+  </head>
+  <body>
+    <form method="post" action="/animals">
+      <input type="text" name="name" value="">
+      <input type="text" name="age" value="">
+      <button type="submit" name="button">Submit</button>
+    </form>
+    <% if(typeof(errors) != 'undefined' ){ %>
+      <% for(var i =0; i<errors.length; i++) { %>
+        <h3><%= errors[i] %></h3>
+      <% } %>
+    <% } %>
+  </body>
+</html>

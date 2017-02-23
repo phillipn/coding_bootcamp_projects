@@ -1,0 +1,35 @@
+<navigation></navigation>
+
+<p>Hello {{ usernameCookie }}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Question</th>
+      <th>Username</th>
+      <th>Answer Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat='question in questions'>
+      <td>{{ question.category }}</td>
+      <td><a href="#!/questions/{{question._id}}">{{ question.question }}</a></td>
+      <td><a href="#!/user/{{question.username}}">{{ question.username }}</a></td>
+      <td>{{ question.answers.length }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Question Form</h3>
+<form name='questionForm' ng-submit='askQuestion()'>
+  <div class="field">
+    <label>Question</label>
+    <input ng-model='question' type="text">
+  </div>
+  <div class="field">
+    <label>Category</label>
+    <select ng-model='category' ng-options='item for item in ["HTML", "CSS", "JS"]'></select>
+  </div>
+  <button type="submit" name="button">Ask Question</button>
+</form>

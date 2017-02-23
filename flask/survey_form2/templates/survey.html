@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}Survey Page{% endblock %}
+{% block content %}
+  <h3>What is your name?</h3>
+  <form method="POST" class="form">
+    <input type="text" name="name">
+    <button type="submit" id="submit">Register!</button>
+  </form>
+{% endblock %}

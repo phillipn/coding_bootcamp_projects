@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Loginter | {% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">
+  </head>
+  <body>
+    <div class="navbar">
+      <a class='brand' href="#">Brand</a>
+      <a class='login' href="#">Logout</a>
+      <a class='name' href="#">Hey {{ request.session.user.first_name }}</a>
+    </div>
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+    {% for message in messages %}
+      <div class="{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </body>
+</html>

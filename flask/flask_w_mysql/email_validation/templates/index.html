@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Email Validator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h3>Enter your email to win a prize!</h3>
+      <form method="post">
+        <label for="email">Email:</label>
+        <input type="text" name="email">
+        <button type="submit" name="button">Submit</button>
+      </form>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for code, message in messages %}
+          <div class="{{ code }}">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+      <h3>Spam List</h3>
+      <ul>
+        {% for email in emails %}
+          <li>{{ email['email_address'] }} joined spam list on {{ email['created_at'].strftime('%m/%d/%Y %I:%M %p') }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

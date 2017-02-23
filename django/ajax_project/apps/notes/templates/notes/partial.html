@@ -1,0 +1,8 @@
+{% for note in notes %}
+  <div class="post">
+    <p>{{ note.title }}</p>
+    <div id='{{ note.id }}' class='content_area'>
+      <p class='content_p'>{{ note.content }}</p>
+    </div>
+  </div>
+{% endfor %}

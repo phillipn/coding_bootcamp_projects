@@ -1,0 +1,53 @@
+body{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: red;
+}
+#gold{
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+  color: black !important;
+}
+p{
+  color: white;
+}
+.container{
+  width: 90%;
+}
+.setting{
+  display: inline-block;
+  margin: 0 auto;
+  width: 20%;
+  height: 135px;
+  width: 200px;
+  border: 1px solid black;
+  margin-top: 3px;
+  background: white;
+}
+.setting p{
+  color: black;
+}
+.setting input{
+  color: white;
+  background: green;
+}
+.activities{
+  height: 200px;
+  margin-left: 5%;
+  width: 90%;
+  border: 1px solid black;
+  overflow: scroll;
+  background: white;
+}
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}

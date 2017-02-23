@@ -1,0 +1,39 @@
+{% extends "form/base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<h2>Submit This Form</h2>
+<div class="form">
+  <form action="/create" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input required type="text" name="name">
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <select required name="location">
+        <option selected disabled>Choose location</option>
+        <option value="Chicago">Chicago</option>
+        <option value="LA">LA</option>
+        <option value="Mars">Mars</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="language">Favorite Language</label>
+      <select required name="language">
+        <option selected disabled>Choose language</option>
+        <option value="Ruby">Ruby</option>
+        <option value="JS">JS</option>
+        <option value="Python">Python</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="comment">Location</label>
+      <textarea name="comment" rows="4" cols="40"></textarea>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+{% endblock %}

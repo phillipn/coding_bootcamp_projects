@@ -1,0 +1,34 @@
+<h3>Hey {{ username }}</h3>
+<form name='eventForm' novalidate ng-submit='addEvent()'>
+  <div class="field">
+    <label>Start Date</label>
+    <input name='date' type="date" ng-model='date' value="">
+    <div ng-if='eventForm.$submitted' ng-messages='eventForm.date.$error'>
+      <p ng-message='required'>Required</p>
+    </div>
+    {{ badDate }}
+  </div>
+  <div class="field">
+    <label>Start Time</label>
+    <input name='startTime' type="time" ng-model='startTime' value="">
+    <div ng-if='eventForm.$submitted' ng-messages='eventForm.date.$error'>
+      <p ng-message='required'>Required</p>
+    </div>
+    {{ badTime }}
+  </div>
+  <div class="field">
+    <label>End Time</label>
+    <input name='endTime' type="time" ng-model='endTime' value="">
+    <div ng-if='eventForm.$submitted' ng-messages='eventForm.date.$error'>
+      <p ng-message='required'>Required</p>
+    </div>
+  </div>
+  <div class="field">
+    <label>Description</label>
+    <input name='description' type="text" ng-model='description' value="">
+    <div ng-if='eventForm.$submitted' ng-messages='eventForm.date.$error'>
+      <p ng-message='required'>Required</p>
+    </div>
+  </div>
+  <button type="submit" name="button">Add event</button>
+</form>

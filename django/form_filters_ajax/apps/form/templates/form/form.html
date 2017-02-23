@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Form</title>
+    {% load staticfiles %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src='{% static "form/js/form.js" %}'></script>
+  </head>
+  <body>
+    Name<input id='name_filter' type="text" name="first_name">
+    Page
+    {% for page in total_pages %}
+      <a id='{{ forloop.counter }}' href="#">{{ forloop.counter }}</a>
+    {% endfor %}
+    <div class="container">
+      {% include 'form/partial.html' %}
+    </div>
+  </body>
+</html>

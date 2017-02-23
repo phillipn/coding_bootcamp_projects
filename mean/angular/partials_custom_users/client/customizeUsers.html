@@ -1,0 +1,26 @@
+<label>First Name</label>
+<input ng-model="first_name" type="text" name="" value="">
+<label>Last Name</label>
+<input ng-model="last_name" type="text" name="" value="">
+<label>Favorite Language</label>
+<input ng-model="language" type="text" name="" value="">
+<button ng-click="create()" type="submit" name="button">Submit</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Favorite Language</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users">
+      <th>{{ user.first_name }}</th>
+      <th>{{ user.last_name }}</th>
+      <th>{{ user.language }}</th>
+      <th><button ng-click="delete(user)" type="button" name="button">Delete</button></th>
+    </tr>
+  </tbody>
+</table>

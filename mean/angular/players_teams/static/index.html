@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Main</title>
+    <script src="angular/angular.min.js" charset="utf-8"></script>
+    <script src="angular-route/angular-route.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var myApp = angular.module('myApp', ['ngRoute']);
+
+      myApp.config(function($routeProvider, $locationProvider){
+        $locationProvider.hashPrefix('');
+        $routeProvider
+          .when('/players', {
+            templateUrl: 'partials/players.html',
+            controller: 'playersController'
+          })
+          .when('/teams', {
+            templateUrl: 'partials/teams.html',
+            controller: 'teamsController'
+          })
+          .when('/teams/:teamid', {
+            templateUrl: 'partials/team.html',
+            controller: 'teamShowController'
+          })
+          .when('/associations', {
+            templateUrl: 'partials/associations.html',
+            controller: 'associationsController'
+          })
+          .otherwise('/')
+      })
+      myApp.controller('playersController', function($scope, myFactory){
+        myFactory.getPlayers(function(players){
+          $scope.items = players
+        })
+        $scope.delete = function(ind){
+          myFactory.deletePlayer(ind)
+        }
+        $scope.type = 'Players';
+      })
+      myApp.controller('teamsController', function($scope, myFactory){
+        myFactory.getTeams(function(teams){
+          $scope.items = teams
+        })
+        $scope.delete = function(ind){
+          myFactory.deleteTeam(ind)
+        }
+        $scope.type = 'Teams';
+      })
+      myApp.controller('associationsController', function($scope, myFactory){
+        myFactory.getTeams(function(teams){
+          $scope.teams = teams
+        })
+        myFactory.getPlayers(function(players){
+          $scope.players = players
+        })
+        myFactory.getRecords(function(records){
+          $scope.items = records
+        })
+        $scope.delete = function(ind){
+          myFactory.deleteRecord(ind)
+        }
+        $scope.createAssociation = function(){
+          myFactory.createAssociation($scope.team_select, $scope.player_select)
+        }
+      })
+      myApp.controller('teamShowController', function($routeParams, $scope, $location, myFactory){
+        myFactory.getTeam($routeParams['teamid'], function(team){
+          if(team){
+            $scope.team = team;
+          } else {
+            $location.url('/')
+          }
+        })
+      })
+      myApp.factory('myFactory', function(){
+        var players = [
+          {id: 1, name: 'Nick', teams: [1]},
+          {id: 2, name: 'Jack', teams: [2]},
+          {id: 3, name: 'Ralph', teams: []}
+        ];
+        var teams = [
+          {id: 1, name: 'Seahawks', players: [1]},
+          {id: 2, name: 'JackHawks', players: [2]}
+        ];
+        return {
+          getPlayers: function(callback){
+            callback(players)
+          },
+          getTeams: function(callback){
+            callback(teams)
+          },
+          getTeam: function(teamid, callback){
+            var team = teams.find(function(team){
+              return team.id == teamid;
+            })
+            var team_index = teams.indexOf(team);
+            callback(teams[team_index])
+          },
+          getRecords: function(callback){
+            var records = [];
+            for(let i =0; i<players.length; i++){
+              if(players[i].teams.length == 0){
+                players[i]['team_name'] = 'None';
+                records.push(players[i]);
+                continue;
+              }
+              for (let j = 0; j < players[i].teams.length; j++) {
+                var team_id = players[i].teams[j]
+                players[i]['team_name'] = teams[team_id - 1]['name']
+                records.push(players[i]);
+              }
+            }
+            if(callback){
+              callback(records)
+            }
+          },
+          deleteRecord: function(ind){
+            var team = teams.find(function(team){
+              return team.name == ind.team_name;
+            })
+            var team_index = teams.indexOf(team);
+            var player_id = ind.id;
+
+            var team_player_index = teams[team_index].players.indexOf(player_id);
+
+            teams[team_index].players.splice(team_player_index, 1)
+            players[player_id - 1].teams.splice(team.id-1, 1)
+            players[player_id - 1]['team_name'] = 'None'
+          },
+          deleteTeam: function(ind){
+            var index = teams.indexOf(ind);
+            teams.splice(index, 1);
+          },
+          deletePlayer: function(ind){
+            var index = players.indexOf(ind);
+            players.splice(index, 1);
+          },
+          createAssociation: function(t, p){
+            var team = teams.find(function(team){
+              return team.name == t;
+            })
+
+            var player = players.find(function(player){
+              return player.name == p;
+            })
+
+            var team_index = teams.indexOf(team);
+            var player_index = players.indexOf(player);
+
+            teams[team_index].players.push(player_index + 1);
+            players[player_index].teams.push(team_index + 1);
+
+            this.getRecords();
+          }
+        }
+      })
+
+      myApp.directive('tableBuilder', function(){
+        return {
+          restrict: 'EA',
+          templateUrl: 'partials/table_directive.html'
+        }
+      })
+
+    </script>
+  </head>
+  <body>
+    <h1>Navbar</h1>
+    <a href="#/teams">Teams</a>
+    <a href="#/players">Players</a>
+    <a href="#/associations">Associations</a>
+    <div ng-view class="container">
+
+    </div>
+  </body>
+</html>

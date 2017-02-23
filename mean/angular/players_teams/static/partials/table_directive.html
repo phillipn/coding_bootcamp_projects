@@ -1,0 +1,16 @@
+<h1>Show {{ type }}</h1>
+<table>
+  <thead>
+    <tr>
+      <th>{{ type }} Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in items">
+      {{ item }}
+      <td>{{ item.name }}</td>
+      <td><button ng-click='delete(item)' type="button" name="button">Delete</button></td>
+    </tr>
+  </tbody>
+</table>

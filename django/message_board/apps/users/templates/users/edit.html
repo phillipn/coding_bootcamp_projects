@@ -1,0 +1,15 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+<div class="form">
+  <h3>Edit User {{ user.id }}</h3>
+  <form action='{% url "users:update_user" id=user.id %}' method="post">
+    {% csrf_token %}
+    {% include 'users/profile_form.html' %}
+  </form>
+  <form action='{% url "users:update_password" id=user.id %}' method="post">
+    {% csrf_token %}
+    {% include 'users/password_form.html' %}
+  </form>
+</div>
+{% endblock %}

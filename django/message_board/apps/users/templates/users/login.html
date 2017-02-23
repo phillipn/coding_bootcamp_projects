@@ -1,0 +1,20 @@
+{% extends 'users/layout.html' %}
+
+{% block content %}
+<h3>Login</h3>
+<form id='login_form' action='{% url  "users:login" %}' method="post">
+  {% csrf_token %}
+  <div class="field">
+    <label for="email">Email:</label>
+    <input type="text" name="email">
+  </div>
+  <div class="field">
+    <label for="password">Password</label>
+    <input type="password" name="password">
+  </div>
+  <div class="submit">
+    <button type="submit" name="button">Log in</button>
+  </div>
+  <a href="{% url 'users:register' %}">Need to register?</a>
+</form>
+{% endblock %}

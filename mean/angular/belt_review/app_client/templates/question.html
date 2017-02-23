@@ -1,0 +1,24 @@
+<navigation></navigation>
+<h3>{{ question.username }} posted a question</h3>
+<p>{{ question.question }}</p>
+
+<form ng-submit='addAnswer()'>
+  <h3>Post your answer here</h3>
+  <textarea ng-model='answer'></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+<div ng-repeat='answer in question.answers'>
+  <a href="#!/user/{{ answer.username }}">{{ answer.username }}</a>
+  <p>{{ answer.answer }} <span ng-click='upvote(answer)'>{{ answer.upvotes.length }}</span> | <span ng-click='downvote(answer)'>{{ answer.downvotes.length }}</span></p>
+  {{ alreadyVoted }}
+  <div class='comment' ng-repeat='comment in answer.comments'>
+    <a href="#!/user/{{ answer.username }}">{{ comment.username }}</a>
+    <p>{{ comment.comment }}</p>
+  </div>
+  <form ng-submit='addComment(answer, comment)'>
+    <h5>Post your comment here</h5>
+    <textarea ng-model='comment'></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</div>

@@ -1,0 +1,19 @@
+body{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+form{
+  padding: 20px;
+  border: 1px solid black;
+  width: 50%;
+  margin: 0 auto;
+}
+.form{
+  text-align: left;
+  margin: 0 auto;
+}

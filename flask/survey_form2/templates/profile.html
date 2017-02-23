@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Profile Page{% endblock %}
+{% block content %}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class=flashes>
+      {% for message in messages %}
+        <h2>{{ message }}</h2>
+      {% endfor %}
+      </div>
+    {% endif %}
+    <h3><a href="{{ url_for("survey") }}">Go to the form page</a></h3>
+  {% endwith %}
+{% endblock %}

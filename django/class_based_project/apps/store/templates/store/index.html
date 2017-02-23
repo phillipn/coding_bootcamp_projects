@@ -1,0 +1,56 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<h1>Traders Store</h1>
+<h3>Product Listing</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Manufacturer</th>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Date Added</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in products %}
+    <tr>
+      <td>{{ item.manufacturer }}</td>
+      <td><a href="{% url 'products:edit' id=item.id %}">{{ item.name }}</a></td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.created_at }}</td>
+      <td>
+        <form action="{% url 'products:delete' id=item.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" name="button">Delete</button>
+        </form>
+        <a href="{% url 'products:edit' id=item.id %}">Edit</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h3>Product Form</h3>
+<form method="post">
+  {% csrf_token %}
+  {% for field in form %}
+    <div>{{ field.label_tag }} {{ field }}</div>
+    {% if field.errors %}
+    <div class="error">{{ field.errors }}</div>
+    {% endif %}
+  {% endfor %}
+  {% if form.non_field_errors %}
+  <div class="error">
+    <ul>
+      {% for err in form.non_field_errors %}
+        <li>{{ err }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  <div class="submit">
+    <button type="submit" name="button">Register</button>
+  </div>
+</form>
+{% endblock %}

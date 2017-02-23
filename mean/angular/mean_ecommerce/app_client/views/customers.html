@@ -1,0 +1,25 @@
+<navigation></navigation>
+<form name='customerForm' ng-submit='addCustomer()'>
+  <h3>Add a new customer</h3>
+  <label>Customer Name</label>
+  <input ng-model='name' type="text" name="name" value="">
+  <button type="submit" name="button">Add User</button>
+</form>
+<table>
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Joined on</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat='customer in customers'>
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.createdAt }}</td>
+      <td>
+        <button ng-click="deleteCustomer(customer)" type="button" name="button">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

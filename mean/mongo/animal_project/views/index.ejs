@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Index</title>
+  </head>
+  <body>
+    Hey
+    <% for(var i =0; i< animals.length; i++) { %>
+      <%= animals[i].name %>
+      <%= animals[i].age %>
+      <form action="animals/<%= animals[i]._id%>" method="post">
+        <button type="submit" name="button">Edit</button>
+      </form>
+    <% } %>
+  </body>
+</html>

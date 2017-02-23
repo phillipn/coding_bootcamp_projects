@@ -1,0 +1,35 @@
+{% extends 'pets/layout.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+  <div class="pet">
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Price</td>
+          <td>Description</td>
+          <td>Actions</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tbody>
+            {% for pet in pets %}
+              <tr>
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.price }}</td>
+                <td>{{ pet.description }}</td>
+                <td>
+                  <a href="{% url 'pets:show' id=pet.id %}">Show</a>
+                  <a href="{% url 'pets:edit' id=pet.id %}">Update</a>
+                  <a href="{% url 'pets:delete' id=pet.id %}">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </tbody>
+    </table>
+    <a href="{% url 'pets:new' %}">Creat new pet</a>
+  </div>
+{% endblock %}

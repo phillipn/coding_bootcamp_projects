@@ -1,0 +1,6 @@
+<h2>User {{ $index + 1 }}</h2>
+<h4>{{ user.first_name }} {{ user.last_name }}</h4>
+<p>Birthday: {{ user.birthday | date:'MM-dd-yyyy'}}</p>
+<a href="#!/show/{{ user._id }}">Show</a>
+<a href="#!/edit/{{ user._id }}">Edit</a>
+<a href ng-click='delete(user._id)'>Delete</a>

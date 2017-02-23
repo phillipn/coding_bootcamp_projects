@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Form Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h4>Register</h4>
+      <form class="" method="post">
+        {{ form.hidden_tag() }}
+        {% for field in form %}
+          <div class="field">
+            {{ field(placeholder=field.label.text) }}
+            {% if field.errors %}
+              {% for error in field.errors %}
+                <span class='error'>{{ error }}</span>
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" id="submit">Register!</button>
+      </form>
+      {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+          <div class="">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+    </div>
+  </body>
+</html>
