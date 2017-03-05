@@ -32,7 +32,8 @@ angular.module('belt')
       }).then(function(comment){
         answer.comments.push(comment.data);
       }).catch(function(err){
-        $scope.alreadyVoted = err.data
+        console.log(err.data);
+        $scope.alreadyCommented = err.data
       })
     }
 

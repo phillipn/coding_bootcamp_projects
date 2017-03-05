@@ -108,6 +108,7 @@ module.exports.addProduct = function(req, res){
   } else {
       image = split[1];
   }
+
   Product.create({
     name: req.body.name,
     description: req.body.description,

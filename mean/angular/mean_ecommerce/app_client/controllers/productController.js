@@ -1,5 +1,5 @@
 angular.module('store')
-  .controller('productController', ['$scope', 'storeFactory', 'Upload', function($scope, storeFactory, Upload){
+  .controller('productController', ['$scope', 'storeFactory', function($scope, storeFactory){
     storeFactory.getProducts().then(function(products){
       $scope.products = products.data
     })
