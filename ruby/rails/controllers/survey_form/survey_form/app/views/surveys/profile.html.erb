@@ -1,0 +1,12 @@
+<h1>Surveys#profile</h1>
+<p>Find me in app/views/surveys/profile.html.erb</p>
+<% if !flash.empty?%>
+  <% flash.each do |k, v| %>
+    <div class="<%=k%>">
+      <%= v %>
+    </div>
+  <% end %>
+<% end %>
+<% @users.each do |user| %>
+  <div><%= user.name %></div>
+<% end %>
