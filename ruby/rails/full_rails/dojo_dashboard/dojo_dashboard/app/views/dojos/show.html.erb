@@ -1,0 +1,33 @@
+<h1>Dojo: <%= @dojo.branch %></h1>
+<h4>Address</h4>
+<%= @dojo.street %>
+<%= @dojo.city %>
+<%= @dojo.state %>
+
+<h4>Student Roster</h4>
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |dojo| %>
+      <tr>
+        <td><%= dojo.branch %></td>
+        <td><%= dojo.street %></td>
+        <td><%= dojo.city %></td>
+        <td><%= dojo.state %></td>
+        <td>
+          <%= link_to 'Show', dojo_path(dojo)%> | <%= link_to 'Edit', edit_dojo_path(dojo) %>
+          <%= link_to 'Destroy', dojo_path(dojo),
+            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<a href="/new">Create a Dojo</a>
