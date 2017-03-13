@@ -1,0 +1,19 @@
+<h1>New User</h1>
+<%= form_for(user) do |f| %>
+  <%= render 'shared/errors', object: user %>
+  <div class="">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="">
+    <%= f.label :favorite_language %>
+    <%= f.text_field :favorite_language %>
+  </div>
+  <div class="">
+    <%= f.submit 'Submit' %>
+  </div>
+<% end %>

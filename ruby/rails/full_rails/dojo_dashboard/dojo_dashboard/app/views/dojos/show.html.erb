@@ -15,19 +15,18 @@
     </tr>
   </thead>
   <tbody>
-    <% @students.each do |dojo| %>
+    <% @dojo.students.each do |student| %>
       <tr>
-        <td><%= dojo.branch %></td>
-        <td><%= dojo.street %></td>
-        <td><%= dojo.city %></td>
-        <td><%= dojo.state %></td>
+        <td><%= student.first_name %></td>
+        <td><%= student.last_name %></td>
+        <td><%= student.email %></td>
         <td>
-          <%= link_to 'Show', dojo_path(dojo)%> | <%= link_to 'Edit', edit_dojo_path(dojo) %>
-          <%= link_to 'Destroy', dojo_path(dojo),
+          <%= link_to 'Show', [@dojo, student] %> | <%= link_to 'Edit', edit_dojo_student_path(@dojo.id, student.id) %>
+          <%= link_to 'Destroy', [@dojo, student],
             data: {:confirm => 'Are you sure?'}, :method => :delete %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<a href="/new">Create a Dojo</a>
+<a href="/dojos/<%=@dojo.id%>/students/new">Create a Student</a>

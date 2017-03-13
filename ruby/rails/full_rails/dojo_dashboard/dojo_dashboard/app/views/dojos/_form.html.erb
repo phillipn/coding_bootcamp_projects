@@ -1,5 +1,5 @@
-<%= form_for(dojo) do |f| %>
-  <%= render 'shared/errors', object: dojo %>
+<%= form_for(@dojo) do |f| %>
+  <%= render 'shared/errors', object: @dojo %>
   <div class="form-group">
     <%= f.label :branch %>
     <%= f.text_field :branch, class: 'form-control' %>
