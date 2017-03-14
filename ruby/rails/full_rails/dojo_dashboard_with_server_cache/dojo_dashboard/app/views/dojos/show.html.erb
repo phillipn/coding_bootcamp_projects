@@ -1,0 +1,23 @@
+<% cache @dojo do %>
+  <h1>Dojo: <%= @dojo.branch %></h1>
+  <h4>Address</h4>
+  <%= @dojo.street %>
+  <%= @dojo.city %>
+  <%= @dojo.state %>
+
+  <h4>Student Roster</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @dojo.students %>
+    </tbody>
+  </table>
+  <a href="/dojos/<%=@dojo.id%>/students/new">Create a Student</a>
+<% end %>

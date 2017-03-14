@@ -1,0 +1,16 @@
+<h1>Dojos#index</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Branch</th>
+      <th>Street</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @dojos %>
+  </tbody>
+</table>
+<%= link_to 'Add Dojo', new_dojo_path %>
