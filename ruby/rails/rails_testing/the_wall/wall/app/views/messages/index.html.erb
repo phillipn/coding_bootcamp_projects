@@ -1,2 +1,33 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<h1>The Wall</h1>
+
+<%= form_for @message do |f| %>
+<%= render 'shared/errors', object:@message %>
+<div class="form-group">
+  <%= f.text_area :message %>
+  <%= f.submit 'Submit' %>
+</div>
+<% end %>
+
+<% @messages.each do |msg| %>
+  <div class="panel">
+    <div class="panel-header">
+      <p><%= msg.user.username %><small> at <%= msg.created_at %></small></p>
+    </div>
+    <div class="panel-body">
+      <p><%= msg.message %></p>
+      <% if !msg.comments.empty? %>
+        <% msg.comments.each do |c| %>
+          <%= c.comment %>
+        <% end %>
+      <% end %>
+
+      <%= form_for [msg, @comment] do |f| %>
+        <%= render 'shared/errors', object:@comment %>
+        <div class="form-group">
+          <%= f.text_area :comment %>
+          <%= f.submit 'Comment' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
