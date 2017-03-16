@@ -1,0 +1,30 @@
+<h1>Todo List</h1>
+
+<%= form_for @todo do |f| %>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :due_date %>
+    <%= f.date_field :due_date %>
+  </div>
+  <!-- <%= date_select :todo, :due_date %> -->
+  <%= f.submit 'Submit' %>
+<% end %>
+
+<% if @todos.any? %>
+  <% @todos.each do |todo| %>
+    <div class="panel" id="<%= todo.id %>todo">
+      <div class="panel-header">
+        <%= todo.due_date %>
+      </div>
+      <div class="panel-body">
+        <input type='checkbox' id="<%= todo.id %>cb">
+        <%= todo.content %>
+      </div>
+    </div>
+    <% end %>
+<% end %>
+
+<button>Hide completed</button>
