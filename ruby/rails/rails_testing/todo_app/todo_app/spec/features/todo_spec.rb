@@ -40,7 +40,8 @@ feature "create page" do
   scenario "hide checked todo item when you click on the height button" do
     register
     3.times { |i| populate_todo(content: "todo#{i}") }
-    check 'todo-1'
+    expect(page).to have_content("todo0")
+    check '1cb'
     expect(page).to have_current_path(root_path)
     expect(page).not_to have_content("todo0")
   end

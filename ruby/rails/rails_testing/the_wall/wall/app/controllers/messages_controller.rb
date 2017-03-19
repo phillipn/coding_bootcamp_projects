@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :logged_in?
+
   def index
     @messages = Message.all.includes(:comments)
     @message = Message.new
@@ -19,5 +21,12 @@ class MessagesController < ApplicationController
   private
     def message_params
       params.require(:message).permit(:message)
+    end
+
+    def logged_in?
+      if !session[:user]
+        puts 'hit'
+        redirect_to new_user_path
+      end
     end
 end

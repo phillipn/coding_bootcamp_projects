@@ -10,9 +10,6 @@ class User < ApplicationRecord
 
   protected
   def password_matcher
-    puts self.password
-    puts self.password_confirmation
-    puts self.password == self.password_confirmation
     if self.password != self.password_confirmation
       errors.add(:password_confirmation, 'Passwords must match')
     end

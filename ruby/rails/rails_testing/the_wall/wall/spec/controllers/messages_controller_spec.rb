@@ -1,19 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe MessagesController, type: :controller do
-
+RSpec.describe MessagesController do
   describe "GET #index" do
-    it "returns http success" do
+    it "renders the :index view" do
       get :index
-      expect(response).to have_http_status(:success)
+      # expect(response).to be_redirect
+      expect(response).to redirect_to '/users/new'
     end
   end
-
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
+  describe "POST #create" do
+    it "renders the :show template" do
+      post :create, params: { message: 'this is my message mang' }
+      # expect(response).to be_redirect
+      expect(response).to redirect_to '/users/new'
     end
   end
-
 end

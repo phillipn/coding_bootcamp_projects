@@ -1,11 +1,11 @@
-# Projects completed at Coding Dojo
-  **Stacks Completed**
-   
+# Stacks completed at Coding Dojo
+
 * Python
    * Frameworks
         * Django
         * Flask
 * MEAN
 * Ruby
-      * Frameworks
-        * Rails
+    * TDD with Rspec and Capybara
+    * Frameworks
+      * Rails
